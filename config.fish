@@ -10,6 +10,7 @@ alias chongqi '/usr/bin/reboot'
 alias qq 'cd ~/.wine/drive_c/Program Files/QQ/Users/398869368'
 
 alias docker 'sudo /usr/bin/docker'
+alias pacman 'sudo /usr/bin/pacman'
 
 function hfa
     if not count $argv > /dev/null

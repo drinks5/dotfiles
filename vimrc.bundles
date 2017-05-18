@@ -652,4 +652,4 @@ call plug#end()
 "
 " markdown
 "autocmd FileType markdown exe ':silent !google-chrome %'
-noremap <leader>mk :exe ':silent !google-chrome %'<CR>
+noremap <leader>mk :exe ':silent !chromium %'<CR>
