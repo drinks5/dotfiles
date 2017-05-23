@@ -571,11 +571,12 @@ endif
 set timeoutlen=1000 ttimeoutlen=100
 
 " theme主题
-set background=dark
+set background=light
 set t_Co=256
 
-" colorscheme solarized
-colorscheme dracula
+"colorscheme solarized
+colorscheme molokai
+" colorscheme dracula
 " colorscheme desert
 
 
