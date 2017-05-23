@@ -1,13 +1,13 @@
+source $HOME/.config/fish/init.fish
 set PATH ~/.local/bin $PATH
 set MANPATH ~/Documents/man:$MANPATH
 
 alias desk 'cd ~/Desktop'
-set fish_function_path $fish_function_path "~/.local/lib/python2.7/site-packages/powerline/bindings/fish" powerline-setup
-alias docker 'sudo (which docker)'
+set fish_function_path $fish_function_path "/home/linlin/.local/lib/python3.6/site-packages/powerline/bindings/fish" powerline-setup
+
 export EDITOR='vim'
-export JMP=180.169.19.191
+
 alias qq 'cd ~/.wine/drive_c/Program\ Files/QQ/Users/398869368/FileRecv/'
-alias chongqi 'sudo /usr/bin/reboot'
 
 function c
     if test -e $argv
@@ -16,13 +16,9 @@ function c
         xclip -selection c
     end
 end
-
-
-function do
-    nohup $argv >/dev/null 2>&1 &
-end
-
-alias grip 'do ~/Documents/datagrip/bin/datagrip.sh'
+alias chongqi '/usr/bin/reboot'
+alias docker 'sudo (which docker)'
+alias pacman 'sudo /usr/bin/pacman'
 
 function hfa
     if not count $argv > /dev/null
@@ -34,11 +30,12 @@ function hfa
                 sshpass -p drinks ssh drinks_huang@$JMP -p 31122
             case dev
                 sshpass -p 123456 ssh root@10.123.1.172 -p 2279
+            case pypy
+                cd ~/Desktop/forest
+                . ~/Documents/pypy/bin/activate.fish
             case cas
                 sshpass -p redhat  ssh root@10.123.1.119
-            case pypy
-                source ~/Documents/pypy/bin/activate.fish
-                cd ~/Desktop/hypers
+
             case '*'
                 cd ~/Desktop/adtracker
                 . ~/Documents/py27/bin/activate.fish

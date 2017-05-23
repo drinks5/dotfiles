@@ -385,6 +385,12 @@ noremap L $
 nnoremap ; :
 
 
+" 命令行模式增强，ctrl - a到行首， -e 到行尾
+
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
+
 " 搜索相关
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 " 进入搜索Use sane regexes"
@@ -419,6 +425,9 @@ vnoremap > >gv
 vnoremap y "+y
 noremap y "+y
 noremap yy "+yy
+
+vnoremap <leader>p "+p
+noremap <leader>p "+p
 
 " auto jump to end of select
 " vnoremap <silent> y y`]
@@ -559,15 +568,14 @@ if has("gui_running")
     set noimd
     set t_Co=256
 endif
-
-
+set timeoutlen=1000 ttimeoutlen=100
 
 " theme主题
 set background=dark
 set t_Co=256
 
 " colorscheme solarized
-colorscheme molokai
+colorscheme dracula
 " colorscheme desert
 
 
