@@ -343,6 +343,7 @@ call plug#end()
         \ 'tagbar' : 1,
         \ 'gitcommit' : 1,
         \}
+    let g:ycm_server_python_interpreter = '/usr/bin/python'
 " }}}
 
 
@@ -369,7 +370,7 @@ call plug#end()
 
 " jedi {{{
     let g:jedi#goto_assignments_command = "<leader>g"
-    let g:jedi#rename_command = "<leader>rn"
+    let g:jedi#rename_command = "<leader>nn"
     let g:jedi#completions_enabled = 0
 
 " ################### 快速移动 ###################
@@ -640,4 +641,4 @@ call plug#end()
 "
 " markdown
 "autocmd FileType markdown exe ':silent !google-chrome %'
-noremap <leader>mk :exe ':silent !google-chrome %'<CR>
+noremap <leader>mk :exe ':silent !chromium %'<CR>
