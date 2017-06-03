@@ -22,6 +22,7 @@
 "==========================================
 " Initial Plugin 加载插件
 "==========================================
+let g:jedi#force_py_version = 3
 
 " 修改leader键
 let mapleader = "\<Space>"
@@ -122,9 +123,6 @@ set novisualbell
 set noerrorbells
 set t_vb=
 set tm=500
-
-" Remember info about open buffers on close
-set viminfo^=%
 
 " For regular expressions turn magic on
 set magic
@@ -501,7 +499,6 @@ function! AutoSetFileHead()
 
     "如果文件类型为python
     if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/env python")
         call append(1, "\# encoding: utf-8")
     endif
 

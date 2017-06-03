@@ -58,8 +58,11 @@ Plug 'bronson/vim-trailing-whitespace'
 "更高效的移动 [,, + w/fx/h/j/k/l]
 Plug 'Lokaltog/vim-easymotion'
 
+"自动切换工作到根工作目录
+Plug 'airblade/vim-rooter'
 
 Plug 'davidhalter/jedi-vim'
+Plug 'mhinz/vim-startify'
 " quick run
 " quickrun
 Plug 'thinca/vim-quickrun'
@@ -362,7 +365,7 @@ call plug#end()
 
 " jedi {{{
     let g:jedi#goto_assignments_command = "<leader>g"
-    let g:jedi#rename_command = "<leader>rn"
+    let g:jedi#rename_command = "<leader>jrn"
     let g:jedi#completions_enabled = 0
 
 " ################### 快速移动 ###################
@@ -687,3 +690,7 @@ call plug#end()
 " markdown
 "autocmd FileType markdown exe ':silent !chromium %'
 noremap <leader>mk :exe ':silent !chromium %'<CR>
+
+" cd
+noremap <leader>cd :cd %:p:h<CR>
+
