@@ -26,6 +26,9 @@ function hfa
         . ~/Documents/py27/bin/activate.fish
     else
         switch $argv
+            case old
+                cd ~/Desktop/hfa/new_adtracker
+                . ~/Documents/py27old/bin/activate.fish
             case jmp
                 sshpass -p drinks ssh drinks_huang@$JMP -p 31122
             case dev
@@ -35,6 +38,8 @@ function hfa
                 . ~/Documents/pypy/bin/activate.fish
             case cas
                 sshpass -p redhat  ssh root@10.123.1.119
+            case jks
+                sshpass -p 123456 ssh root@10.1.0.98
 
             case '*'
                 cd ~/Desktop/adtracker
