@@ -419,13 +419,17 @@ autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
 vnoremap < <gv
 vnoremap > >gv
 
-" 复制选中区到系统剪切板中
 vnoremap y "+y
 noremap y "+y
 noremap yy "+yy
-
-vnoremap <leader>p "+p
-noremap <leader>p "+p
+noremap p "+p
+vnoremap d "+d
+noremap dd "+dd
+" 复制选中区到系统剪切板中
+if !has('nvim')
+    vnoremap <leader>p "+p
+    noremap <leader>p "+p
+endif
 
 " auto jump to end of select
 " vnoremap <silent> y y`]
