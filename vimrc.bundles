@@ -387,7 +387,7 @@ call plug#end()
 
 
 " jedi {{{
-    let g:jedi#goto_assignments_command = "<leader>gd"
+    let g:jedi#goto_command = "<leader>gd"
     let g:jedi#rename_command = "<leader>jrn"
     let g:jedi#completions_enabled = 0
 

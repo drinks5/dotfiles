@@ -20,10 +20,11 @@ end
 alias chongqi '/usr/bin/reboot'
 alias docker 'sudo (which docker)'
 alias pacman 'sudo /usr/bin/pacman'
+alias dk 'docker-compose'
 
 function ssrd
     cd ~/Desktop/ssrd
-    . ~/Documents/py36/bin/activate.fish
+    . ~/Documents/ssrd/bin/activate.fish
 end
 
 function recovery-pacman
