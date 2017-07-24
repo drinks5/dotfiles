@@ -96,8 +96,6 @@ else
     " run neomake on the current file on every write:
     autocmd! BufWritePost * Neomake
 " }}}
-    let g:python3_host_prog = '/usr/bin/python'
-    let g:python_host_prog = '/usr/bin/python2'
 
 endif
 " 自动补全单引号，双引号等
@@ -390,6 +388,9 @@ call plug#end()
     let g:jedi#goto_command = "<leader>gd"
     let g:jedi#rename_command = "<leader>jrn"
     let g:jedi#completions_enabled = 0
+    let omnifunc='pythoncomplete#Complete'
+
+
 
 " ################### 快速移动 ###################
 

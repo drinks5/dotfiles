@@ -23,6 +23,7 @@
 " Initial Plugin 加载插件
 "==========================================
 let g:jedi#force_py_version = 3
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " 修改leader键
 let mapleader = "\<Space>"
