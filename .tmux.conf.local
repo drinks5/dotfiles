@@ -1,2 +1,1 @@
 run-shell "powerline-daemon -q"
-source "/home/linlin/.local/lib/python3.6/site-packages/powerline/bindings/tmux/powerline.conf"

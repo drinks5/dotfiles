@@ -420,12 +420,6 @@ autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
 vnoremap < <gv
 vnoremap > >gv
 
-vnoremap y "+y
-noremap y "+y
-noremap yy "+yy
-noremap p "+p
-vnoremap d "+d
-noremap dd "+dd
 " 复制选中区到系统剪切板中
 if !has('nvim')
     vnoremap <leader>p "+p
