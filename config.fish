@@ -3,6 +3,8 @@ set PATH ~/.local/bin $PATH
 set PATH ~/.npm-global/bin $PATH
 set MANPATH ~/Documents/man:$MANPATH
 
+set -x HOMEBREW_BOTTLE_DOMAIN https://mirrors.ustc.edu.cn/homebrew-bottles
+
 
 export FZF_DEFAULT_COMMAND='Rg --files --hidden --follow --glob "!.git/*"'
 
@@ -12,13 +14,6 @@ set fish_function_path $fish_function_path "/home/linlin/.local/lib/python3.6/si
 alias vim 'nvim'
 export EDITOR='nvim'
 
-function c
-    if test -e $argv
-        cat $argv | xclip -selection c
-    else
-        xclip -selection c
-    end
-end
 alias docker 'sudo (which docker)'
 alias dk 'docker-compose'
 
@@ -38,7 +33,7 @@ plo = pull origin
 end
 
 function ssrd
-    cd /app/ssrd
+    cd ~/Documents/ssrd/src
     source ~/Documents/ssrd/bin/activate.fish
 end
 
@@ -96,7 +91,7 @@ end
 function board
     if not count $argv > /dev/null
         cd ~/Desktop/Dashboard
-        source ~/Documents/py35/bin/activate.fish
+        source ~/Documents/py36/bin/activate.fish
     else
         switch $argv
             case 'dev'
@@ -108,6 +103,10 @@ function board
                 source ~/Documents/py27/bin/activate.fish
         end
     end
+end
+
+function jsonpp
+    echo $argv[1] | python -m json.tool
 end
 
 function updateall

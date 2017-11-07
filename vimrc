@@ -104,7 +104,6 @@ set cursorline
 " 好处：误删什么的，如果以前屏幕打开，可以找回
 set t_ti= t_te=
 
-
 " 鼠标暂不启用, 键盘党....
 set mouse-=a
 " 启用鼠标
@@ -151,7 +150,7 @@ set scrolloff=7
 " 命令行（在状态行下）的高度，默认为1，这里是2
 set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 " Always show the status line - use 2 lines for the status bar
-set laststatus=2
+set laststatus=1
 
 " 显示行号
 set number
@@ -261,8 +260,6 @@ set formatoptions+=B
 "==========================================
 " others 其它设置
 "==========================================
-" vimrc文件修改之后自动加载, windows
-autocmd! bufwritepost _vimrc source %
 " vimrc文件修改之后自动加载, linux
 autocmd! bufwritepost .vimrc source %
 
@@ -274,9 +271,6 @@ set completeopt=longest,menu
 set wildmenu
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc,*.class
-
-" 离开插入模式后自动关闭预览窗口
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
@@ -291,29 +285,12 @@ autocmd BufReadPost quickfix nnoremap <buffer> s <C-w><Enter><C-w>K
 " command-line window
 autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
 
-
-" 上下左右键的行为 会显示其他信息
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-
 " 打开自动定位到最后编辑的位置, 需要确认 .viminfo 当前用户可写
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 "==========================================
 " HotKey Settings  自定义快捷键设置
 "==========================================
-
-" 主要按键重定义
-
-" 关闭方向键, 强迫自己用 hjkl
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
 
 "Treat long lines as break lines (useful when moving around in them)
 "se swap之后，同物理行上线直接跳
@@ -350,7 +327,6 @@ endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 
-
 " 分屏窗口移动, Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -373,12 +349,6 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <Leader>z :ZoomToggle<CR>
-
-
-" Go to home and end using capitalized directions
-noremap H ^
-noremap L $
-
 
 " Map ; to : and save a million keystrokes 用于快速进入命令行
 nnoremap ; :
@@ -403,28 +373,14 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
-" 去掉搜索高亮
-noremap <silent><leader>/ :nohls<CR>
-
 " switch # *
 nnoremap # *
 nnoremap * #
-
-" for # indent, python文件中输入新行时#号注释不切回行首
-autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
-
-
-" => 选中及操作改键
 
 " 调整缩进后自动选中，方便再次操作
 vnoremap < <gv
 vnoremap > >gv
 
-" 复制选中区到系统剪切板中
-if !has('nvim')
-    vnoremap <leader>p "+p
-    noremap <leader>p "+p
-endif
 
 " auto jump to end of select
 " vnoremap <silent> y y`]
@@ -440,19 +396,6 @@ nnoremap <leader>v V`}
 " w!! to sudo & write a file
 cmap w!! w !sudo tee >/dev/null %
 
-" 滚动Speed up scrolling of the viewport slightly
-nnoremap <C-e> 2<C-e>
-nnoremap <C-y> 2<C-y>
-
-
-" Jump to start and end of line using the home row keys
-" 增强tab操作, 导致这个会有问题, 考虑换键
-"nmap t o<ESC>k
-"nmap T O<ESC>j
-
-
-:nnoremap <leader>w :Bdelete<CR>
-
 " 交换 ' `, 使得可以快速使用'跳到marked位置
 nnoremap ' `
 nnoremap ` '
@@ -460,32 +403,14 @@ nnoremap ` '
 " remap U to <C-r> for easier redo
 nnoremap U <C-r>
 
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
 "==========================================
 " FileType Settings  文件类型设置
 "==========================================
 
 " 具体编辑文件类型的一般设置，比如不要 tab 等
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd FileType python,js,html,css set tabstop=4 shiftwidth=4 expandtab ai
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
-autocmd BufRead,BufNewFile *.part set filetype=html
 " disable showmatch when use > in php
-au BufWinEnter *.php set mps-=<:>
-
-
-
-" 保存python文件时删除多余空格
-fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 
 " 定义函数AutoSetFileHead，自动插入文件头
@@ -508,66 +433,18 @@ endfunc
 
 
 " 设置可以高亮的关键字
-if has("autocmd")
-  " Highlight TODO, FIXME, NOTE, etc.
-  if v:version > 701
-    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
-    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
-  endif
-endif
-
-"==========================================
-" TEMP 设置, 尚未确定要不要
-"==========================================
-
-" tmux
-" function! WrapForTmux(s)
-"   if !exists('$TMUX')
-"     return a:s
-"   endif
-"
-"   let tmux_start = "\<Esc>Ptmux;"
-"   let tmux_end = "\<Esc>\\"
-"
-"   return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
-" endfunction
-"
-" let &t_SI .= WrapForTmux("\<Esc>[?2004h")
-" let &t_EI .= WrapForTmux("\<Esc>[?2004l")
-
-" allows cursor change in tmux mode
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" if exists('$TMUX')
-    " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-" endif
+autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
+autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
 
 
+nnoremap <leader>w :Bdelete<CR>
 "==========================================
 " Theme Settings  主题设置
 "==========================================
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guifont=Monaco:h14
-    if has("gui_gtk2")   "GTK2
-        set guifont=Monaco\ 12,Monospace\ 12
-    endif
-    set guioptions-=T
-    set guioptions+=e
-    set guioptions-=r
-    set guioptions-=L
-    set guitablabel=%M\ %t
-    set showtabline=1
-    set linespace=2
-    set noimd
-    set t_Co=256
-endif
 set timeoutlen=1000 ttimeoutlen=100
 
 " theme主题
-set background=light
+set background=dark
 set t_Co=256
 
 "colorscheme solarized
@@ -575,11 +452,6 @@ colorscheme molokai
 " colorscheme dracula
 " colorscheme desert
 
-
-" 设置标记一列的背景颜色和数字一行颜色一致
-hi! link SignColumn   LineNr
-hi! link ShowMarksHLl DiffAdd
-hi! link ShowMarksHLu DiffChange
 
 " for error highlight，防止错误整行标红导致看不清
 highlight clear SpellBad

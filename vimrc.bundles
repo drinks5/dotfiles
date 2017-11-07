@@ -30,79 +30,25 @@ call plug#begin('~/.vim/bundle')
 " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
 
 " syntastic
-Plug 'tpope/vim-fugitive'
 " auto complete
 " 代码自动补全
 " 迄今为止用到的最好的自动VIM自动补全插件
 " 重启 :YcmRestartServer
+Plug 'airblade/vim-rooter'
 Plug 'davidhalter/jedi-vim'
-Plug 'rizzatti/dash.vim'
-Plug 'posva/vim-vue'
-Plug 'maksimr/vim-jsbeautify'
 
-if !has('nvim')
-    Plug 'Valloric/YouCompleteMe'
-    Plug 'scrooloose/syntastic'
-    Plug 'davidhalter/jedi-vim'
-    " YouCompleteMe {{{
-        "youcompleteme  默认tab  s-tab 和自动补全冲突
-        let g:ycm_key_list_select_completion=['<c-n>']
-        let g:ycm_key_list_previous_completion=['<c-p>']
-        let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
-        let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-        let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
-        let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
-        let g:ycm_collect_identifiers_from_tags_files = 1
-        " 开启语法关键字补全
-        let g:ycm_seed_identifiers_with_syntax=1
+Plug 'digitaltoad/vim-pug'
 
-        "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+" typescript
+Plug 'mhartington/nvim-typescript'
+Plug 'HerringtonDarkholme/yats.vim'
 
-        " 跳转到定义处, 分屏打开
-        let g:ycm_goto_buffer_command = 'horizontal-split'
-        " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-        nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-        nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+Plug 'Shougo/deoplete.nvim'
+Plug 'zchee/deoplete-jedi'
+Plug 'neomake/neomake'
+Plug 'sbdchd/neoformat'
 
-        " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
-        " old version
-        if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
-            let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
-        endif
-        " new version
-        if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-            let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-        endif
-
-        " 直接触发自动补全 insert模式下
-        " let g:ycm_key_invoke_completion = '<C-Space>'
-        " 黑名单,不启用
-        let g:ycm_filetype_blacklist = {
-            \ 'tagbar' : 1,
-            \ 'gitcommit' : 1,
-            \}
-    " }}}
-
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'zchee/deoplete-jedi'
-    Plug 'neomake/neomake'
-    Plug 'neomake/neomake'
-    " {{{
-        " neomake is async => it doesn't block the editor
-        " It's a syntastic alternative. Syntastic was slow for me on python files.
-        " $ sudo pip2/pip3 install flake8 -U
-        " $ sudo pip2/pip3 install vulture -U
-    let g:neomake_python_enabled_makers = ['flake8']
-        " let g:neomake_python_enabled_makers = ['flake8', 'pep8']
-        " E501 is line length of 80 characters
-    let g:neomake_python_flake8_maker = { 'args': ['--ignore=E115,E266,E501'], }
-    let g:neomake_python_pep8_maker = { 'args': ['--max-line-length=100', '--ignore=E115,E266'], }
-    " run neomake on the current file on every write:
-    autocmd! BufWritePost * Neomake
-" }}}
-
-endif
+Plug 'vim-scripts/DoxygenToolkit.vim'
 " 自动补全单引号，双引号等
 Plug 'Raimondi/delimitMate'
 
@@ -110,7 +56,6 @@ Plug 'Raimondi/delimitMate'
 " 快速注释
 Plug 'scrooloose/nerdcommenter'
 
-Plug 'airblade/vim-gitgutter'
 Plug 'dracula/vim'
 
 " 快速加入修改环绕字符
@@ -121,16 +66,9 @@ Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 "更高效的移动 [,, + w/fx/h/j/k/l]
 Plug 'Lokaltog/vim-easymotion'
 
-"自动切换工作到根工作目录
-Plug 'airblade/vim-rooter'
 
 Plug 'mhinz/vim-startify'
-" quick run
-" quickrun
-Plug 'thinca/vim-quickrun'
 " gundo
-" edit history, 可以查看回到某个历史状态
-Plug 'sjl/gundo.vim'
 
 " view
 " airline
@@ -140,9 +78,6 @@ Plug 'vim-airline/vim-airline-themes'
 " rainbow_parentheses
 " 括号显示增强
 Plug 'kien/rainbow_parentheses.vim'
-" 主题 solarized
-" solarized
-Plug 'altercation/vim-colors-solarized'
 " molokai
 " 主题 molokai
 Plug 'tomasr/molokai'
@@ -151,7 +86,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-eunuch'  "操作文件或目录
-Plug 'lilydjwg/fcitx.vim'  "insert模式换到普通模式时使用英文输入法
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'moll/vim-bbye'
 
@@ -184,56 +118,18 @@ if count(g:bundle_groups, 'python')
     Plug 'hdima/python-syntax'
     Plug 'hynek/vim-python-pep8-indent'
 
-    " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
-    " pip install isort
-    Plug 'fisadev/vim-isort'
-    " Shift-V 上下选中, ctrl + i 规范化
-    let g:vim_isort_map = '<C-i>'
-
-endif
-
-if count(g:bundle_groups, 'php')
-    " piv
-    " shift-v可以查看函数手册 / leader-pd生成注释
-    Plug 'spf13/PIV'
-endif
-
-if count(g:bundle_groups, 'ruby')
-    Plug 'vim-ruby/vim-ruby'
-    Plug 'tpope/vim-rails'
-    " dir / dar
-    Plug 'nelstrom/vim-textobj-rubyblock'
-
-    " 有bug, 和当前有冲突, 尚未解决, 不要打开 => TODO: solve this problem
-    " Plug 'tpope/vim-endwise'
 endif
 
 if count(g:bundle_groups, 'javascript')
     " javascript
     " 注意: syntax这个插件要放前面
-    Plug 'othree/yajs.vim' | Plug 'pangloss/vim-javascript'
+    Plug 'pangloss/vim-javascript'
     " Plug 'jelera/vim-javascript-syntax' | Plug 'pangloss/vim-javascript'
 
     " TODO: jquery? for, remove or keep
     Plug 'othree/javascript-libraries-syntax.vim'
-    let g:used_javascript_libs = 'jquery,underscore,backbone'
-    autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-
-
-    " for javascript 自动补全, 配合YCM, 需要安装全局环境的（非nvm中) node.js&npm
-    " 安装完成后还需要在 bundle/tern_for_vim 下执行 npm install 安装依赖 `cd ~/.vim/bundle/tern_for_vim && npm install`
-    " see https://github.com/marijnh/tern_for_vim
-    " Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 endif
 
-
-if count(g:bundle_groups, 'coffeescript')
-    Plug 'kchmck/vim-coffee-script'
-endif
-
-" if count(g:bundle_groups, 'shell')
-    " Plug 'Shougo/vimshell.vim'
-" endif
 
 if count(g:bundle_groups, 'json')
     " json
@@ -250,12 +146,6 @@ if count(g:bundle_groups, 'css')
     " Plug 'lilydjwg/colorizer'
 endif
 
-if count(g:bundle_groups, 'less')
-    " ###### vim.less : less 自动更新##########
-    " Plug 'groenewege/vim-less'
-    " autocmd BufWritePost *.less :!lessc % > %:p:r.css
-endif
-
 if count(g:bundle_groups, 'html')
     " ###### emmet HTML complete #########
     " Plug "mattn/emmet-vim"
@@ -266,129 +156,17 @@ if count(g:bundle_groups, 'nginx')
 endif
 
 
-" this is just for beta version
-if count(g:bundle_groups, 'beta')
-    " indent
-    Plug 'nathanaelkane/vim-indent-guides'
-    " <leader>ig to trigger
-    let g:indent_guides_start_level = 2
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_auto_colors = 0
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
-
-endif
-
-
 " Add plugins to &runtimepath
 call plug#end()
 
 
 " ################### 基础 ######################
 
-" syntastic {{{
-    " dependence
-    " 1. shellcheck `brew install shellcheck` https://github.com/koalaman/shellcheck
-
-    " let g:syntastic_error_symbol='>>'
-    " let g:syntastic_warning_symbol='>'
-    " let g:syntastic_check_on_open=1
-    " let g:syntastic_check_on_wq=0
-    " let g:syntastic_enable_highlighting=1
-
-    " " checkers
-    " " 最轻量
-    " " let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes
-    " " 中等
-    " " error code: http://pep8.readthedocs.org/en/latest/intro.html#error-codes
-    " let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
-    " let g:syntastic_python_pep8_args='--ignore=E501,E225,E124,E712'
-    " " 重量级, 但是足够强大, 定制完成后相当个性化
-    " " pylint codes: http://pylint-messages.wikidot.com/all-codes
-    " " let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
-    " " let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
-    " " let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
-
-    " " if js
-    " " let g:syntastic_javascript_checkers = ['jsl', 'jshint']
-    " " let g:syntastic_html_checkers=['tidy', 'jshint']
-
-    " " to see error location list
-    " let g:syntastic_always_populate_loc_list = 1
-    " let g:syntastic_enable_signs = 1
-    " let g:syntastic_auto_loc_list = 0
-    " let g:syntastic_auto_jump = 0
-    " let g:syntastic_loc_list_height = 5
-
-    " function! ToggleErrors()
-        " let old_last_winnr = winnr('$')
-        " lclose
-        " if old_last_winnr == winnr('$')
-            " " Nothing was closed, open syntastic_error location panel
-            " Errors
-        " endif
-    " endfunction
-    " nnoremap <Leader>s :call ToggleErrors()<cr>
-
-    " " ,en ,ep to jump between errors
-    " function! <SID>LocationPrevious()
-    " try
-        " lprev
-    " catch /^Vim\%((\a\+)\)\=:E553/
-        " llast
-    " endtry
-    " endfunction
-
-    " function! <SID>LocationNext()
-    " try
-        " lnext
-    " catch /^Vim\%((\a\+)\)\=:E553/
-        " lfirst
-    " endtry
-    " endfunction
-
-    " nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
-    " nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
-    " nmap <silent> <Leader>ep    <Plug>LocationPrevious
-    " nmap <silent> <Leader>en    <Plug>LocationNext
-
-    " " 修改高亮的背景色, 适应主题
-    " highlight SyntasticErrorSign guifg=white guibg=black
-
-    " " 禁止插件检查java
-    " " thanks to @marsqing, see https://github.com/wklken/k-vim/issues/164
-    " let g:syntastic_mode_map = {'mode': 'active', 'passive_filetypes': ['java'] }
-
-    " " 关闭syntastic语法检查, 鼠标复制代码时用到, 防止把错误标志给复制了
-    " nnoremap <silent> <Leader>ec :SyntasticToggleMode<CR>
-" }}}
-
-
-" ################### 自动补全 ###################
-
-
-" delimitMate {{{
-    " for python docstring ",优化输入
-    au FileType python let b:delimitMate_nesting_quotes = ['"']
-    au FileType php let delimitMate_matchpairs = "(:),[:],{:}"
-    " 关闭某些类型文件的自动补全
-    "au FileType mail let b:delimitMate_autoclose = 0
-" }}}
-
-
-" ################### 快速编码 ###################
-
 " nerdcommenter {{{
     let g:NERDSpaceDelims=1
     let g:NERDAltDelims_python = 1
 " }}}
 
-
-" jedi {{{
-" j
-    let g:jedi#goto_command = "<leader>gd"
-    let g:jedi#rename_command = "<leader>gr"
-    let g:jedi#completions_enabled = 0
 
 " ################### 快速移动 ###################
 
@@ -521,55 +299,9 @@ call plug#end()
 
 " ################### 语言相关 ###################
 
-" quickrun {{{
-    let g:quickrun_config = {
-    \   "_" : {
-    \       "outputter" : "message",
-    \   },
-    \}
-
-    let g:quickrun_no_default_key_mappings = 1
-    nmap <Leader>r <Plug>(quickrun)
-    map <F10> :QuickRun<CR>
 " }}}
 
 
-" pythonsyntax {{{
-    let python_highlight_all = 1
-    autocmd FileType python noremap <F7> <Esc>:w<CR>:call OperateBreakpoint(line('.'))<CR>
-
-    function! OperateBreakpoint(lnum) "{{{
-        let l:line = getline(a:lnum)
-        let l:breakpoint_cmd = 'import ipdb; ipdb.set_trace(context=30)'
-        if strridx(l:line, l:breakpoint_cmd) != -1
-            normal dd
-        else
-            let l:plnum = prevnonblank(a:lnum)
-            call append(line('.')-1, repeat(' ', indent(l:plnum)).l:breakpoint_cmd)
-            normal k
-        endif
-        noautocmd write
-    endfunction "}}}
-" }}}
-
-" piv {{{
-    let g:DisableAutoPHPFolding = 1
-" }}}
-
-
-" vimgo {{{
-    let g:go_highlight_functions = 1
-    let g:go_highlight_methods = 1
-    let g:go_highlight_structs = 1
-    let g:go_highlight_operators = 1
-    let g:go_highlight_build_constraints = 1
-
-    let g:go_fmt_fail_silently = 1
-    " format with goimports instead of gofmt
-    let g:go_fmt_command = "goimports"
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go', 'java'] }
-" }}}
 
 " markdown {{{
     let g:vim_markdown_folding_disabled=1
@@ -647,42 +379,68 @@ call plug#end()
     nnoremap <C-f> :BLines<Space>
     noremap <leader>r :BTags<CR>
 
+" {{{ neomake
+    let g:neomake_python_enabled_makers = ['flake8']
+    " let g:neomake_python_enabled_makers = ['flake8', 'pep8']
+    " E501 is line length of 80 characters
+    let g:neomake_python_flake8_maker = { 'args': ['--ignore=E115,E266,E501'], }
+    " run neomake on the current file on every write:
+    autocmd! BufWritePost * Neomake
+    let g:neomake_highlight_columns = 1
+    " When writing a buffer.
+    call neomake#configure#automake('w')
+    " When writing a buffer, and on normal mode changes (after 750ms).
+    call neomake#configure#automake('nw', 750)
+    " When reading a buffer (after 1s), and when writing.
+    call neomake#configure#automake('rw', 1000)
 
-" gitgutter {{{
-    " 同git diff,实时展示文件中修改的行
-    " 只是不喜欢除了行号多一列, 默认关闭,gs时打开
-    let g:gitgutter_map_keys = 0
-    let g:gitgutter_enabled = 0
-    let g:gitgutter_highlight_lines = 1
-    nnoremap <leader>gs :GitGutterToggle<CR>
-" }}}
+    augroup my_neomake_highlights
+        au!
+        autocmd ColorScheme *
+            \ hi link NeomakeError SpellBad |
+            \ hi link NeomakeWarning SpellCap
+    augroup END
 
-
-" dash {{{
-    nmap <silent> <leader>k <Plug>DashSearch
-"}}}
-
+    augroup my_neomake_signs
+        au!
+        autocmd ColorScheme *
+            \ hi NeomakeErrorSign ctermfg=white |
+            \ hi NeomakeWarningSign ctermfg=yellow
+    augroup END
 " ####### temp #######
 
 " beta {{{
     " python code format
     " format all file
-    autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-    " format select block
-    " autocmd FileType python vnoremap <leader>y :!yapf<Cr>
+    noremap <leader>y :Neoformat<CR>
+    let g:neoformat_javascript_prettier= {
+            \ 'exe': 'prettier',
+            \ 'args': ['--indent-size 2'],
+            \ 'stdin': 1,
+            \ }
 
-    " Plug 'mindriot101/vim-yapf'
-    " scriptencoding utf-8
-    " let g:yapf_style = "google"
-    " let g:yapf_style = "pep8"
-    " setenv PYTHONIOENCODING UTF-8
-    " nnoremap <leader>y :call Yapf()<cr>
+    let g:neoformat_enabled_javascript = ['prettier']
+
+    let g:neoformat_typescript_prettier= {
+            \ 'exe': 'prettier',
+            \ 'args': ['--tab-width 2'],
+            \ 'stdin': 1,
+            \ }
+
+    let g:neoformat_enabled_typescript = ['prettier']
 " }}}
+"
+"
+
+
+" /// dox 文档生成工具
+    let g:DoxygenToolkit_briefTag_pre="@说明 "
+    let g:DoxygenToolkit_paramTag_pre="@参数 "
+    let g:DoxygenToolkit_returnTag="@返回值 "
+    let g:DoxygenToolkit_authorName="drinks"
+    nmap <leader>df :Dox<CR>
+    nmap <leader>da :DoxAuthor<CR>
 
 "------------------------------------------- end of configs --------------------------------------------
 "
 let g:rooter_patterns = ['.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
-
-" markdown
-"autocmd FileType markdown exe ':silent !chromium %'
-noremap <leader>mk :exe ':silent !chromium %'<CR>
