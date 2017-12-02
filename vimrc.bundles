@@ -434,9 +434,9 @@ call plug#end()
 
 
 " /// dox 文档生成工具
-    let g:DoxygenToolkit_briefTag_pre="@说明 "
-    let g:DoxygenToolkit_paramTag_pre="@参数 "
-    let g:DoxygenToolkit_returnTag="@返回值 "
+    let g:DoxygenToolkit_briefTag_pre=""
+    let g:DoxygenToolkit_paramTag_pre="@param "
+    let g:DoxygenToolkit_returnTag="@return "
     let g:DoxygenToolkit_authorName="drinks"
     nmap <leader>df :Dox<CR>
     nmap <leader>da :DoxAuthor<CR>
