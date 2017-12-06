@@ -1,10 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/huangjun/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export AUTOENV_ENV_FILENAME='.virtualenv'
 review() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
@@ -76,14 +78,17 @@ plugins=(
   brew
   brew-cask
   osx
+  archlinux
   autojump
   docker
   docker-compose
+  autoenv
   golang
   iterm2
   vi-mode
   zsh-syntax-highlighting
   zsh-autosuggestions
+  zsh-completions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -108,8 +113,6 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
-export http_proxy=127.0.0.1:1089
-export https_proxy=127.0.0.1:1089
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -119,7 +122,7 @@ export https_proxy=127.0.0.1:1089
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="/usr/local/bin/nvim"
-source /usr/local/opt/autoenv/activate.sh
+alias vim="$(which nvim)"
+alias ~~="~/Documents"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

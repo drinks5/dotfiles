@@ -1,4 +1,6 @@
 {
+
+  "editor.fontFamily": "'Monaco', 'monospace', monospace, 'Droid Sans Fallback'",
     "search.useIgnoreFiles": true,
     "search.useIgnoreFilesByDefault": true,
     "search.exclude": {
@@ -50,13 +52,25 @@
                 "2",
                 "s"
             ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "after": ["g", "t"]
+        },
+        {
+            "before": [
+                "J"
+            ],
+            "after": ["g", "T"]
         }
     ],
     "editor.minimap.enabled": false,
     "editor.lineNumbers": "relative",
     "workbench.colorTheme": "Monokai",
     "workbench.panel.location": "bottom",
-    "python.pythonPath": "/Users/huangjun/.virtualenvs/ssrd/bin/python",
+    "python.pythonPath": "~/.virtualenvs/pypy3/bin/python",
     "window.zoomLevel": -1,
     "element-helper.version": "2.0",
     "editor.quickSuggestions": {
@@ -72,5 +86,6 @@
     "sync.host": "",
     "sync.pathPrefix": "",
     "sync.quietSync": false,
-    "sync.askGistName": false
+    "sync.askGistName": false,
+    "files.autoSave": "off"
 }
