@@ -75,6 +75,7 @@ ZSH_THEME="refined"
 plugins=(
   git
   git-flow
+  git-flow-completion
   brew
   brew-cask
   osx
