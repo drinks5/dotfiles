@@ -12,6 +12,7 @@
     "workbench.activityBar.visible": false,
     "workbench.statusBar.visible": true,
     "workbench.sideBar.location": "left",
+    "tslint.alwaysShowStatus": true,
     "python.disablePromptForFeatures": [
         "pylint"
     ],
@@ -65,6 +66,15 @@
             ],
             "after": ["g", "T"]
         }
+        {
+            "before": [
+                "H"
+            ],
+            "commands": [{
+                "command": "editor.action.showHover",
+                "args": []
+            }]
+        }
     ],
     "editor.minimap.enabled": false,
     "editor.lineNumbers": "relative",
@@ -72,7 +82,6 @@
     "workbench.panel.location": "bottom",
     "python.pythonPath": "~/.virtualenvs/pypy3/bin/python",
     "window.zoomLevel": -1,
-    "element-helper.version": "2.0",
     "editor.quickSuggestions": {
         "strings": true
     },
