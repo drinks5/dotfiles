@@ -1,12 +1,13 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:~/Library/Python/2.7/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export AUTOENV_ENV_FILENAME='.virtualenv'
+export EDITOR='nvim'
 review() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
@@ -91,9 +92,7 @@ plugins=(
   zsh-autosuggestions
   zsh-completions
 )
-
 source $ZSH/oh-my-zsh.sh
-
 
 # User configuration
 
@@ -127,3 +126,5 @@ alias vim="$(which nvim)"
 alias ~~="~/Documents"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
