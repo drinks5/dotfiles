@@ -1,13 +1,12 @@
-pip install powerline-status
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-if ! test -d ~/.fonts; then mkdir ~/.fonts; fi
-mv PowerlineSymbols.otf ~/.fonts/
-fc-cache -vf ~/.fonts/
-if ! test -d ~/.config/fontconfig/conf.d; then mkdir ~/.config/fontconfig/conf.d/ -p; fi
-mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
-
 ln .tmux.conf.local ~/
 ln .tmux.conf ~/
-ln completions/* ~/.config/fish/completions/
-ln config.fish ~/.config/fish/
+ln .zshrc ~/
+ln .gitconfig ~/
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions &
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting &
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install &
+
