@@ -83,7 +83,6 @@ plugins=(
   autojump
   docker
   docker-compose
-  autoenv
   golang
   iterm2
   vi-mode

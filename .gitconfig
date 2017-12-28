@@ -1,11 +1,17 @@
 [user]
-	name = drinksober
-	email = drinksober@foxmail.com
-	username = drinksober
+	name = Pavan Kumar Sunkara
+	email = pavan.sss1991@gmail.com
+	username = pksunkara
 [core]
 	editor = vim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = pavan.sss1991@gmail.com
+	smtppass = password
+	smtpserverport = 587
 [web]
 	browser = google-chrome
 [instaweb]
@@ -35,6 +41,9 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
+[github]
+	user = pkumar
+	token = token
 [gitflow "prefix"]
 	feature = feature-
 	release = release-
@@ -108,6 +117,7 @@
 	ms = merge --skip
 	#############
 	o = checkout
+	co = checkout
 	ob = checkout -b
 	#############
 	pr = prune -v
