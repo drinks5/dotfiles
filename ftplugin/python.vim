@@ -1,8 +1,3 @@
-
-let g:jedi#goto_command = "<leader>gd"
-let g:jedi#rename_command = "<leader>gr"
-let g:jedi#completions_enabled = 0
-
 let b:delimitMate_nesting_quotes = ['"']
 
 let python_highlight_all = 1

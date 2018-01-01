@@ -34,8 +34,8 @@ call plug#begin('~/.vim/bundle')
 " 代码自动补全
 " 迄今为止用到的最好的自动VIM自动补全插件
 " 重启 :YcmRestartServer
+Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin'}
 Plug 'airblade/vim-rooter'
-Plug 'davidhalter/jedi-vim'
 
 Plug 'digitaltoad/vim-pug'
 
@@ -44,9 +44,6 @@ Plug 'mhartington/nvim-typescript'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'Shougo/deoplete.nvim'
-Plug 'zchee/deoplete-jedi'
-Plug 'neomake/neomake'
-Plug 'sbdchd/neoformat'
 
 Plug 'vim-scripts/DoxygenToolkit.vim'
 " 自动补全单引号，双引号等
@@ -373,59 +370,31 @@ call plug#end()
     noremap <leader>f :Rg<Space>
     noremap <C-p> :Files<CR>
     noremap <leader>b :Buffers<CR>
-    "y代表复制选择的内容，这些内容会保存到寄存器中 <C-R>" 代表把之前复制或者删
-    "除的内容显示出来 <CR>为回车
-    vnoremap <C-f> y:BLines<Space><C-R>"<CR>
-    nnoremap <C-f> :BLines<Space>
-    noremap <leader>r :BTags<CR>
 
-" {{{ neomake
-    let g:neomake_python_enabled_makers = ['flake8']
-    " let g:neomake_python_enabled_makers = ['flake8', 'pep8']
-    " E501 is line length of 80 characters
-    let g:neomake_python_flake8_maker = { 'args': ['--ignore=E115,E266,E501'], }
-    " run neomake on the current file on every write:
-    autocmd! BufWritePost * Neomake
-    let g:neomake_highlight_columns = 1
-    " When writing a buffer.
-
-    augroup my_neomake_highlights
-        au!
-        autocmd ColorScheme *
-            \ hi link NeomakeError SpellBad |
-            \ hi link NeomakeWarning SpellCap
-    augroup END
-
-    augroup my_neomake_signs
-        au!
-        autocmd ColorScheme *
-            \ hi NeomakeErrorSign ctermfg=white |
-            \ hi NeomakeWarningSign ctermfg=yellow
-    augroup END
 " ####### temp #######
 
-" beta {{{
-    " python code format
-    " format all file
-    noremap <leader>y :Neoformat<CR>
-    let g:neoformat_javascript_prettier= {
-            \ 'exe': 'prettier',
-            \ 'args': ['--indent-size 2'],
-            \ 'stdin': 1,
-            \ }
+" lsp {{{
+set hidden
 
-    let g:neoformat_enabled_javascript = ['prettier']
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'typescript': ['javascript-typescript-stdio'],
+    \ 'python': ['pyls', '-v'],
+    \ 'vue': ['vls'],
+    \ }
 
-    let g:neoformat_typescript_prettier= {
-            \ 'exe': 'prettier',
-            \ 'args': ['--tab-width 2'],
-            \ 'stdin': 1,
-            \ }
+nnoremap <silent> gk :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> gy :call LanguageClient_textDocument_formatting()<CR>
+nnoremap <silent> gf :call LanguageClient_textDocument_codeAction()<CR>
+let g:LanguageClient_loggingLevel='DEBUG'
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
-    let g:neoformat_enabled_typescript = ['prettier']
-" }}}
-"
-"
+
+" nnoremap <silent> call LanguageClient_textDocument_documentSymbol()<CR>
+set signcolumn=yes
 
 
 " /// dox 文档生成工具
