@@ -1,8 +1,8 @@
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-ln .tmux/.tmux.conf.local ~/
-ln .tmux/.tmux.conf ~/
+ln .tmux.conf.local ~/
+ln .tmux.conf ~/
 ln .zshrc ~/
 ln .gitconfig ~/
+ln .npmrc ~/
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions &
