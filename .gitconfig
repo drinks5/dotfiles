@@ -1,7 +1,7 @@
 [user]
-	name = Pavan Kumar Sunkara
-	email = pavan.sss1991@gmail.com
-	username = pksunkara
+	name = drinks
+	email = drinks.huang@hypers.com
+	username = drinks
 [core]
 	editor = vim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
