@@ -83,8 +83,6 @@ else
 fi
 export SHELL=$system_shell
 
-
-echo "Step4: compile YouCompleteMe"
 echo "It will take a long time, just be patient!"
 echo "If error,you need to compile it yourself"
 
