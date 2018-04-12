@@ -45,20 +45,14 @@ pre_window: source $(pipenv --venv)/bin/activate
 windows:
   - editor: nvim
   - server:
-      layout: main-vertical
+      layout: c9f8,190x41,0,0[190x20,0,0,190x20,0,21{95x20,0,21,94x20,96,21}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
-        - left:
-          layout: main-horizontal
-          panes:
-            - api: python manage.py runserver 0.0.0.0:8888
-            - shell: python manage.py shell_plus
-        - right:
-          layout: main-horizontal
-          panes:
-            - fe: 
-              - cd fe
-              - env NODE_ENV=local npm run dev
-            - git: git status 
+        - server: python manage.py runserver 0.0.0.0:8888
+        - fe:
+          - cd fe
+          - env NODE_ENV=local npm run dev
+        - shell: python manage.py shell_plus
+        - git: git status 
