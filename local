@@ -3,6 +3,11 @@ ln .tmux.conf ~/
 ln .zshrc ~/
 ln .gitconfig ~/
 ln .npmrc ~/
+
+mkdir -p ~/.config/tmuxinator
+ln tmuxinator/hfa.yml ~/.config/tmuxinator/
+ln tmuxinator/ss.yml ~/.config/tmuxinator/
+
 mkdir ~/.pip
 ln pip.conf ~/.pip/
 
