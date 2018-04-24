@@ -46,6 +46,7 @@ Plug 'digitaltoad/vim-pug'
 
 " typescript
 Plug 'mhartington/nvim-typescript'
+Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'Shougo/deoplete.nvim'
