@@ -5,4 +5,4 @@ mccabe
 yapf
 pyls-mypy
 neovim
-python-language-server
+python-language-server[all]
