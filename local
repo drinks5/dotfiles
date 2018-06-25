@@ -1,8 +1,19 @@
+# 执行方式如 arch
+# env install='pacman -S --noconfirm' ./local
+$install neovim git curl wget openssh python zsh gcc nodejs npm tmux ripgrep autojump openssh
+
+git clone https://github.com/drinksober/dotfiles.git --depth=1 /root/dotfiles
+cd ~/dotfiles
+mkdir ~/Documents 
+mkdir ~/.config/nvim -p 
+ln /usr/bin/python3 /usr/local/bin/python3
+
 ln .tmux.conf.local ~/
 ln .tmux.conf ~/
 ln .zshrc ~/
 ln .gitconfig ~/
 ln .npmrc ~/
+ln .vimrc.bundles ~/.vimrc.bundles \
 
 mkdir -p ~/.config/tmuxinator
 ln tmuxinator/hfa.yml ~/.config/tmuxinator/

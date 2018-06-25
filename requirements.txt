@@ -6,3 +6,4 @@ yapf
 pyls-mypy
 neovim
 python-language-server[all]
+pipenv
