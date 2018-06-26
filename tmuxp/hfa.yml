@@ -4,7 +4,6 @@ windows:
 - panes:
   - nvim
   window_name: editor
-- layout: c9f8,190x41,0,0[190x20,0,0,190x20,0,21{95x20,0,21,94x20,96,21}]
   panes:
   - server: python manage.py runserver 0.0.0.0:8000
   - fe:
