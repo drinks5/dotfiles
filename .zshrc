@@ -124,7 +124,6 @@ source $ZSH/oh-my-zsh.sh
 alias vim="$(which nvim)"
 alias vi="$(which nvim)"
 alias ~~="~/Documents"
-alias vir="source $(pipenv --venv)/bin/activate"
 alias docker="sudo docker"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

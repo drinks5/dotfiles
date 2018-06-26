@@ -12,9 +12,9 @@ ln .gitconfig $HOME/
 ln .npmrc $HOME/
 ln .vimrc.bundles $HOME/.vimrc.bundles \
 
-mkdir -p $HOME/.config/tmuxinator
-ln tmuxinator/hfa.yml $HOME/.config/tmuxinator/
-ln tmuxinator/ss.yml $HOME/.config/tmuxinator/
+mkdir -p $HOME/.tmuxp
+ln tmuxp/hfa.yml $HOME/.tmuxp/
+ln tmuxp/ss.yml $HOME/.tmuxp/
 
 mkdir $HOME/.pip
 ln pip.conf $HOME/.pip/

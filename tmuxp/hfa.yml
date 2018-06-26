@@ -1,0 +1,15 @@
+session_name: hfa
+start_directory: ~/Documents/repo/adtracker
+windows:
+- panes:
+  - nvim
+  window_name: editor
+- layout: c9f8,190x41,0,0[190x20,0,0,190x20,0,21{95x20,0,21,94x20,96,21}]
+  panes:
+  - server: python manage.py runserver 0.0.0.0:8000
+  - fe:
+    - cd front-end
+    - env NODE_HOST=devs.cn:3000 PROXY_HOST=http://devs.cn:8000/ npm run devpkg
+  - shell: python manage.py shell
+  - git: git status
+  window_name: server
