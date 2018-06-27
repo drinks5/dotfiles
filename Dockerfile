@@ -1,5 +1,6 @@
 FROM docker.io/archimg/base-devel
 
+ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 RUN sed -i "\$a[archlinuxcn]\nServer = https://cdn.repo.archlinuxcn.org/\$arch" /etc/pacman.conf && \
 	pacman -Syy --noconfirm && pacman -S archlinuxcn-keyring --noconfirm && \
 	pacman -Syu --noconfirm
