@@ -1,5 +1,5 @@
-session_name: hfa
-start_directory: ~/Documents/repo/adtracker
+session_name: ss
+start_directory: ~/Documents/repo/ssrd
 windows:
   - window_name: editor
     shell_command_before: 
@@ -12,8 +12,5 @@ windows:
       - source $(pipenv --venv)/bin/activate
     panes:
         - python manage.py runserver 0.0.0.0:8000
-        - fe:
-            - cd front-end
-            - env NODE_HOST=devs.cn:3000 PROXY_HOST=http://devs.cn:8000/ npm run devpkg
         - python manage.py shell
         - git status
