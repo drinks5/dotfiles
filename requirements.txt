@@ -2,9 +2,10 @@ repo
 pycodestyle
 pydocstyle
 mccabe
-yapf
 pyls-mypy
 neovim
 python-language-server[all]
 pipenv
 tmuxp
+pyls-isort
+pyls-black

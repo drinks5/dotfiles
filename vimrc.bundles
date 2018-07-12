@@ -45,7 +45,6 @@ Plug 'airblade/vim-rooter'
 Plug 'digitaltoad/vim-pug'
 
 " typescript
-Plug 'mhartington/nvim-typescript'
 Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'posva/vim-vue'
@@ -92,21 +91,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-eunuch'  "操作文件或目录
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'moll/vim-bbye'
-" Track the engine.
-Plug 'SirVer/ultisnips'
-
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-n>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-
 " nav
 " nerdtree nerdtreetabs
 Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
@@ -389,7 +378,6 @@ call plug#end()
     let g:fzf_commands_expect = 'alt-enter,ctrl-x'
     noremap <leader>f :Rg<Space>
     noremap <C-p> :Files<CR>
-    noremap <leader>b :Buffers<CR>
     noremap <leader>r :BTags<CR>
 
 " ####### temp #######
@@ -405,11 +393,11 @@ let g:LanguageClient_serverCommands = {
     \ 'vue': ['vls'],
     \ }
 
-nnoremap <silent> gk :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> gy :call LanguageClient_textDocument_formatting()<CR>
-nnoremap <silent> gf :call LanguageClient_textDocument_codeAction()<CR>
+nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<CR>
+nnoremap <silent> gc :call LanguageClient_textDocument_codeAction()<CR>
 "nnoremap <silent> <leader>r :call LanguageClient_textDocument_documentSymbol()<CR>
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 let g:LanguageClient_loggingLevel='DEBUG'
@@ -423,14 +411,20 @@ let g:vue_disable_pre_processors=1
 "-------------------deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-call deoplete#custom#buffer_option('auto_complete', v:false)
+imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ?
+\ "\<C-y>" : "\<CR>"
+"call deoplete#custom#buffer_option('auto_complete', v:false)
 
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
+call deoplete#custom#source('ultisnips', 'rank', 10000)
 
-" Disable the candidates in Comment/String syntaxes.
-call deoplete#custom#source('_',
-            \ 'disabled_syntaxes', ['Comment', 'String'])
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+let g:UltiSnipsExpandTrigger = "<nop>"
+inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
