@@ -71,6 +71,9 @@ Plug 'Lokaltog/vim-easymotion'
 
 
 Plug 'mhinz/vim-startify'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+Plug 'dhruvasagar/vim-table-mode'
 " gundo
 
 " view
@@ -310,8 +313,9 @@ call plug#end()
 
 
 " markdown {{{
-    let g:vim_markdown_folding_disabled=1
-
+    " let g:vim_markdown_folding_disabled=1
+    let g:vim_markdown_autowrite = 1
+    let g:table_mode_corner='|'
 " }}}
 
 
@@ -428,3 +432,5 @@ let g:UltiSnipsExpandTrigger = "<nop>"
 inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+

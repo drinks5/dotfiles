@@ -14,4 +14,6 @@ windows:
         - python manage.py runserver 0.0.0.0:8000
         - python manage.py shell
         - git status
-        - env NODE_ENV=local npm run dev
+        - fe:
+            - cd fe
+            - env NODE_ENV=local npm run dev
