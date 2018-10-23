@@ -40,14 +40,13 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-Plug 'airblade/vim-rooter'
 
 Plug 'digitaltoad/vim-pug'
 
 " typescript
 Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'posva/vim-vue'
+Plug 'airblade/vim-rooter'
 
 
 Plug 'Shougo/deoplete.nvim'
@@ -68,6 +67,8 @@ Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 " sneak
 "更高效的移动 [,, + w/fx/h/j/k/l]
 Plug 'Lokaltog/vim-easymotion'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 
 
 Plug 'mhinz/vim-startify'
@@ -94,9 +95,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-eunuch'  "操作文件或目录
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'moll/vim-bbye'
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " nav
@@ -363,7 +361,6 @@ call plug#end()
     \ 'spinner': ['fg', 'Label'],
     \ 'header':  ['fg', 'Comment'] }
 
-    let g:fzf_tags_command = 'ctags -R'
 
     command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
@@ -380,9 +377,8 @@ call plug#end()
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
     let g:fzf_commands_expect = 'alt-enter,ctrl-x'
-    noremap <leader>f :Rg<Space>
+    noremap <C-f> :Rg<Space>
     noremap <C-p> :Files<CR>
-    noremap <leader>r :BTags<CR>
 
 " ####### temp #######
 
@@ -395,6 +391,7 @@ let g:LanguageClient_serverCommands = {
     \ 'typescript': ['javascript-typescript-stdio'],
     \ 'python': ['pyls', '-v'],
     \ 'vue': ['vls'],
+    \ 'go': ['go-langserver']
     \ }
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
@@ -402,6 +399,7 @@ nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_rename()<CR>
 nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<CR>
 nnoremap <silent> gc :call LanguageClient_textDocument_codeAction()<CR>
+nnoremap <silent> <c-r> :call LanguageClient_textDocument_documentSymbol()<CR>
 "nnoremap <silent> <leader>r :call LanguageClient_textDocument_documentSymbol()<CR>
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 let g:LanguageClient_loggingLevel='DEBUG'
@@ -409,28 +407,16 @@ let g:LanguageClient_loggingLevel='DEBUG'
 set signcolumn=yes
 "------------------------------------------- end of configs --------------------------------------------
 "
-let g:rooter_patterns = ['.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
 let g:vue_disable_pre_processors=1
 
 "-------------------deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ?
-\ "\<C-y>" : "\<CR>"
-"call deoplete#custom#buffer_option('auto_complete', v:false)
-
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
-call deoplete#custom#source('ultisnips', 'rank', 10000)
-
-let g:UltiSnipsExpandTrigger = "<nop>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-let g:UltiSnipsExpandTrigger = "<nop>"
-inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
-
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 
+
+let g:rooter_patterns = ['.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"

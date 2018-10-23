@@ -6,3 +6,4 @@ configs
 myconfig.sh
 init.vim
 *.idea
+.mypy_cache
