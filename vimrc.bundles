@@ -17,7 +17,7 @@ filetype off " required! turn off
 " inspired by spf13, 自定义需要的插件集合
 if !exists('g:bundle_groups')
     " let g:bundle_groups=['python', 'markdown', 'tmux', 'beta', 'html', 'json', 'nginx', 'golang', 'shell']
-    let g:bundle_groups=['python', 'markdown', 'html', 'tmux', 'beta', 'json', 'nginx', 'javascript']
+    let g:bundle_groups=['python', 'markdown', 'html', 'tmux', 'beta', 'json', 'nginx', 'javascript', 'go']
 endif
 
 " ----------------------------------------------------------------------------
@@ -47,18 +47,24 @@ Plug 'digitaltoad/vim-pug'
 Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'airblade/vim-rooter'
+Plug 'Shougo/deoplete-lsp'
 
 
 Plug 'Shougo/deoplete.nvim'
 
 " 自动补全单引号，双引号等
 Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-fugitive'
+"Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+
+
 
 " quick edit
 " 快速注释
 Plug 'scrooloose/nerdcommenter'
 
 Plug 'dracula/vim'
+Plug 'kassio/neoterm'  " 终端插件
 
 " 快速加入修改环绕字符
 " for repeat -> enhance surround.vim, . to repeat command
@@ -95,6 +101,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-eunuch'  "操作文件或目录
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'moll/vim-bbye'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'zchee/deoplete-go'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " nav
@@ -111,12 +122,6 @@ if count(g:bundle_groups, 'markdown')
     Plug 'plasticboy/vim-markdown', {'for': 'md'}
 endif
 
-if count(g:bundle_groups, 'golang')
-    " 1. vim a.go
-    " 2. :GoInstallBinaries
-    " vimgo  https://github.com/fatih/vim-go
-    Plug 'fatih/vim-go', {'for': 'go'}
-endif
 
 
 if count(g:bundle_groups, 'python')
@@ -379,6 +384,7 @@ call plug#end()
     let g:fzf_commands_expect = 'alt-enter,ctrl-x'
     noremap <C-f> :Rg<Space>
     noremap <C-p> :Files<CR>
+    noremap <leader>r :BTags<CR>
 
 " ####### temp #######
 
@@ -403,6 +409,8 @@ nnoremap <silent> <c-r> :call LanguageClient_textDocument_documentSymbol()<CR>
 "nnoremap <silent> <leader>r :call LanguageClient_textDocument_documentSymbol()<CR>
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 let g:LanguageClient_loggingLevel='DEBUG'
+let g:LanguageClient_autoStart = 1
+
 
 set signcolumn=yes
 "------------------------------------------- end of configs --------------------------------------------
@@ -411,12 +419,28 @@ let g:vue_disable_pre_processors=1
 
 "-------------------deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+\ "\<C-y>" : "\<CR>"
+"call deoplete#custom#buffer_option('auto_complete', v:false)
+
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
+call deoplete#custom#source('ultisnips', 'rank', 10000)
+
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+let g:UltiSnipsExpandTrigger = "<nop>"
+inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
+
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 let g:rooter_patterns = ['.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
