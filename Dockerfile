@@ -11,7 +11,7 @@ RUN  pacman -S --noconfirm sudo && \
      useradd mum5
 RUN sed -i "s/\#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g" /etc/locale.gen && \ 
     locale-gen
-RUN mkdir -p /home/mum5/Documents
-
-WORKDIR /home/mum5/Documents
+RUN mkdir -p /home/mum5/Documents/repo
+USER mum5
+WORKDIR /home/mum5/Documents/repo
 CMD ["/bin/zsh"]

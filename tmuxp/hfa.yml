@@ -13,7 +13,7 @@ windows:
     panes:
         - python manage.py runserver 0.0.0.0:8000
         - fe:
-            - cd fe
-            - env NODE_HOST=devs.cn:3000 PROXY_HOST=http://devs.cn:8000/ npm run devpkg
+          - cd fe
+          - env NODE_HOST=devs.cn:3000 PROXY_HOST=http://devs.cn:8000/ npm run devpkg
         - python manage.py shell
         - git status

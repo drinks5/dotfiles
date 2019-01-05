@@ -12,8 +12,8 @@ windows:
       - source $(pipenv --venv)/bin/activate
     panes:
         - python manage.py runserver 0.0.0.0:8000
+        - fe:
+          - cd fe
+          - env NODE_ENV=local npm run dev
         - python manage.py shell
         - git status
-        - fe:
-            - cd fe
-            - env NODE_ENV=local npm run dev

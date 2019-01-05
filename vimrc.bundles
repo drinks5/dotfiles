@@ -104,7 +104,7 @@ Plug 'moll/vim-bbye'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'zchee/deoplete-go'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -397,8 +397,12 @@ let g:LanguageClient_serverCommands = {
     \ 'typescript': ['javascript-typescript-stdio'],
     \ 'python': ['pyls', '-v'],
     \ 'vue': ['vls'],
-    \ 'go': ['go-langserver']
+    \ 'go': ['bingo', '--mode', 'stdio', '--logfile', '/tmp/lspserver.log','--trace', '--pprof', ':6060'],
     \ }
+
+let g:LanguageClient_rootMarkers = {
+        \ 'go': ['.git', 'go.mod'],
+        \ }
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
