@@ -1,0 +1,69 @@
+set number
+set relativenumber
+set ignorecase
+set smartcase
+
+" Emulated Plugins
+set surround
+
+
+" Copy to system clipboard as well
+set clipboard+=unnamed
+set clipboard+=ideaput
+set hlsearch
+set incsearch
+
+" Use Idea to join lines smartly
+set ideajoin
+
+" These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
+
+" let mapleader = ","
+let mapleader = " "
+nnoremap ; :
+" let maplocalleader = ","
+
+" Use Q for formatting the current paragraph (or visual selection)
+nmap gf gqap
+
+" key bindings for quickly moving between windows
+" h left, l right, k up, j down
+" nmap <shift>h <c-w>h
+" nmap <leader>l <c-w>l
+nmap H <c-w>h
+nmap L <c-w>l
+
+" Closing tabs
+
+
+noremap <leader>j <ESC>:action GotoNextError<CR>
+" jump to previous error，就近原则
+noremap <leader>k <ESC>:action GotoPreviousError<CR>
+" Navigation
+" nnoremap ' `
+" nnoremap ` '
+nmap `` :action Back<cr>
+"nmap <leader>L :action RecentLocations<cr>
+"nmap <leader>g :action GotoDeclaration<cr>
+" goto source
+noremap gi <ESC>:action GotoImplementation<CR>
+" goto declaration
+noremap gd <ESC>:action GotoDeclaration<CR>
+"nmap <leader>u :action FindUsages<cr>
+"nmap <leader>f :action GotoFile<cr>
+"nmap <leader>c :action GotoClass<cr>
+"nmap <leader>s :action GotoSymbol<cr>
+nmap <leader>m :action FileStructurePopup<cr>
+
+" nmap <leader>a :action Switcher<cr>
+nmap <leader>a :action RecentChangedFiles<cr>
+nmap <leader>r <CR>
+
+" Terminal
+nmap <leader>t :action ActivateTerminalToolWindow<cr>
+
+" unimpaired mappings - from https://github.com/saaguero/ideavimrc/blob/master/.ideavimrc
+" Tabs
+nnoremap <S-j> :action PreviousTab<cr>
+nnoremap <S-k> :action NextTab<cr>
+nnoremap qq :wq<CR>
