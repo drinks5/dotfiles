@@ -3,13 +3,29 @@ set relativenumber
 set ignorecase
 set smartcase
 
+" 设置命令历史记录条数
+
+
+" Vim内部使用的编码
+" set encoding=utf-8
+" 读文件时Vim自动侦测文件编码方式的编码列表项，
+" prc(等同于chinese)即Windows下的cp936、Unix下的euc-cn
+" set fileencodings=ucs-bom,utf-8,prc,gb18030,taiwan,japan,korea,latin1
+"" 处理CJK东亚二义性宽度字符类 (East Asian Width Class Ambiguous)
+"" 例如，欧元符号、注册记号、版权记号、希腊字母、西里尔字母等等
+"if v:lang=~? '^/(zh/)/|/(ja/)/|/(ko/)'
+"    set ambiwidth=double
+"endif
+" 解决console输出乱码
+" language messages zh_CN.utf-8
+
 " Emulated Plugins
 set surround
 
 
 " Copy to system clipboard as well
 set clipboard+=unnamed
-set clipboard+=ideaput
+" set clipboard+=ideaput
 set hlsearch
 set incsearch
 
@@ -23,22 +39,22 @@ let mapleader = " "
 nnoremap ; :
 " let maplocalleader = ","
 
-" Use Q for formatting the current paragraph (or visual selection)
-nmap gf gqap
-
 " key bindings for quickly moving between windows
 " h left, l right, k up, j down
 " nmap <shift>h <c-w>h
 " nmap <leader>l <c-w>l
-nmap H <c-w>h
-nmap L <c-w>l
+noremap H <c-w>h
+noremap L <c-w>l
+noremap F :action FindInPath<cr>
+" Tabs
+nnoremap <S-j> :action PreviousTab<cr>
+nnoremap <S-k> :action NextTab<cr>
 
-" Closing tabs
-
-
-noremap <leader>j <ESC>:action GotoNextError<CR>
+noremap <leader>k <ESC>:action GotoNextError<CR>
 " jump to previous error，就近原则
-noremap <leader>k <ESC>:action GotoPreviousError<CR>
+noremap <leader>j <ESC>:action GotoPreviousError<CR>
+
+
 " Navigation
 " nnoremap ' `
 " nnoremap ` '
@@ -63,7 +79,11 @@ nmap <leader>r <CR>
 nmap <leader>t :action ActivateTerminalToolWindow<cr>
 
 " unimpaired mappings - from https://github.com/saaguero/ideavimrc/blob/master/.ideavimrc
-" Tabs
-nnoremap <S-j> :action PreviousTab<cr>
-nnoremap <S-k> :action NextTab<cr>
 nnoremap qq :wq<CR>
+
+" nnoremap <leader>er :action CloseAllReadonly<cr>
+" close editors but active
+" nnoremap <leader>ea :action CloseAllEditorsButActive<cr>
+
+map gf <Action>(ReformatCode)
+"map  <Action>(ToggleLineBreakpoint)
